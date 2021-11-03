@@ -4,6 +4,9 @@ dotenv.config();
 import express from 'express';
 const app = express();
 
+import cors from 'cors';
+app.use(cors());
+
 const PORT = process.env.PORT || 8000;
 
 // connect the mongodb
@@ -12,9 +15,11 @@ MongoClient();
 
 // import routers
 import categoryRouter from './src/routers/categoryRouter.js';
+import productRouter from './src/routers/productRouter.js';
 
 //use routers
 app.use('/api/v1/category', categoryRouter);
+app.use('/api/v1/product', productRouter);
 
 app.listen(PORT, (error) => {
   console.log('server running at port 8000');
