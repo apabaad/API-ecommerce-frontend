@@ -1,2 +1,21 @@
 ### Category Routers
 GET http://localhost:8000/api/v1/category
+
+
+### Product Routers
+GET http://localhost:8000/api/v1/product
+
+### create user
+POST http://localhost:8000/api/v1/user
+Content-Type: application/json
+
+ {
+    "fname" : "Ram",
+    "lname" : "ram",
+    "password":"abcs9898909",
+    "dob" : "2000-02-20", 
+    "email" : "abc@a.com", 
+    "phone": "0400000", 
+    "address": "kent",
+    "gender": "male"
+ }
