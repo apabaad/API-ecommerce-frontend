@@ -14,8 +14,18 @@ Content-Type: application/json
     "lname" : "ram",
     "password":"abcs9898909",
     "dob" : "2000-02-20", 
-    "email" : "abc@a.com", 
+    "email" : "abcw@aq.com", 
     "phone": "0400000", 
     "address": "kent",
     "gender": "male"
  }
+
+
+### user login
+POST http://localhost:8000/api/v1/user/login
+Content-Type: application/json
+
+{
+    "email" : "abw@a.com",
+    "password":"abcs9898909"
+}
