@@ -10,5 +10,5 @@ export const createUser = (newUser) => {
 };
 
 export const findUserByEmail = (email) => {
-  return userSchema.findOne({ email }); //{email} because mongodb always takes parameter as an object. just email wont work.
+  return userSchema.findOne({ email }); //{email} because to find, mongodb always takes parameter as an object. just email wont work.
 };

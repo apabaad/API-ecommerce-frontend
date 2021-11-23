@@ -1,10 +1,15 @@
 import express from 'express';
 import { createUser, findUserByEmail } from '../modals/user/userModel.js';
 import { newFormValidation } from '../middlewares/validation.middleware.js';
+import { hashPassword, verifyPassword } from '../helpers/bcrypt.helper.js';
+
 const Router = express.Router();
 
 Router.post('/', newFormValidation, async (req, res) => {
   try {
+    const password = req.body.password;
+    const hashedPassword = hashPassword(password);
+    req.body.password = hashedPassword;
     const result = await createUser(req.body);
 
     if (result) {
@@ -28,22 +33,29 @@ Router.post('/', newFormValidation, async (req, res) => {
 });
 
 Router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
   try {
-    const result = await findUserByEmail(email);
+    const { email, password } = req.body;
+    console.log(req.body);
 
-    if (result) {
+    // find user by email
+    const result = await findUserByEmail(email);
+    console.log(result);
+
+    if (verifyPassword(password, result.password)) {
+      result.password = undefined;
       return res.json({
         status: 'success',
         message: 'login successful',
         result,
       });
     }
+
     return res.json({
       status: 'error',
       message: 'Authentication Failed',
     });
   } catch (error) {
+    console.log(error);
     res.json({
       status: 'error',
       message: 'Failed to login',
