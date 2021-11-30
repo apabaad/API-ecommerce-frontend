@@ -1,6 +1,9 @@
 import express from 'express';
 import { createUser, findUserByEmail } from '../modals/user/userModel.js';
-import { newFormValidation } from '../middlewares/validation.middleware.js';
+import {
+  loginValidation,
+  newFormValidation,
+} from '../middlewares/validation.middleware.js';
 import { hashPassword, verifyPassword } from '../helpers/bcrypt.helper.js';
 
 const Router = express.Router();
@@ -32,7 +35,7 @@ Router.post('/', newFormValidation, async (req, res) => {
   }
 });
 
-Router.post('/login', async (req, res) => {
+Router.post('/login', loginValidation, async (req, res) => {
   try {
     const { email, password } = req.body;
     console.log(req.body);
@@ -43,6 +46,7 @@ Router.post('/login', async (req, res) => {
 
     if (verifyPassword(password, result.password)) {
       result.password = undefined;
+
       return res.json({
         status: 'success',
         message: 'login successful',
@@ -52,13 +56,13 @@ Router.post('/login', async (req, res) => {
 
     return res.json({
       status: 'error',
-      message: 'Authentication Failed',
+      message: 'Login Failed',
     });
   } catch (error) {
     console.log(error);
     res.json({
       status: 'error',
-      message: 'Failed to login',
+      message: 'User email not registered',
     });
   }
 });

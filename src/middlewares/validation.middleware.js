@@ -22,3 +22,20 @@ export const newFormValidation = (req, res, next) => {
   }
   next();
 };
+
+export const loginValidation = (req, res, next) => {
+  const schema = Joi.object({
+    email: Joi.string().email({ minDomainSegments: 2 }),
+    password: Joi.string().min(6).max(50).required(),
+  });
+
+  const result = schema.validate(req.body);
+
+  if (result.error) {
+    return res.json({
+      status: 'error',
+      message: result.error.message,
+    });
+  }
+  next();
+};
