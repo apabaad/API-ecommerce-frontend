@@ -5,6 +5,7 @@ import {
   newFormValidation,
 } from '../middlewares/validation.middleware.js';
 import { hashPassword, verifyPassword } from '../helpers/bcrypt.helper.js';
+import { getJWTs } from '../helpers/jwt.helper.js';
 
 const Router = express.Router();
 
@@ -38,25 +39,26 @@ Router.post('/', newFormValidation, async (req, res) => {
 Router.post('/login', loginValidation, async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
 
     // find user by email
     const result = await findUserByEmail(email);
-    console.log(result);
 
     if (verifyPassword(password, result.password)) {
       result.password = undefined;
+
+      const tokens = await getJWTs({ _id: result._id, email });
 
       return res.json({
         status: 'success',
         message: 'login successful',
         result,
+        tokens,
       });
     }
 
     return res.json({
       status: 'error',
-      message: 'Login Failed',
+      message: 'Wrong Email or Password',
     });
   } catch (error) {
     console.log(error);

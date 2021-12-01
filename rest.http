@@ -12,9 +12,9 @@ Content-Type: application/json
  {
     "fname" : "Ram",
     "lname" : "ram",
-    "password":"abcs9898909",
+    "password":"111111",
     "dob" : "2000-02-20", 
-    "email" : "abcw@aq.com", 
+    "email" : "abc@a.com", 
     "phone": "0400000", 
     "address": "kent",
     "gender": "male"
@@ -26,6 +26,6 @@ POST http://localhost:8000/api/v1/user/login
 Content-Type: application/json
 
 {
-    "email" : "abcw@a.com",
-    "password":"abcs9898909"
+    "email" : "abc@a.com",
+    "password":"111111"
 }

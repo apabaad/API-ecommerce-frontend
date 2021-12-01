@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
-import { createAccessToken } from '../modals/session/Session.model';
-import { setRefreshJWT } from '../modals/user/userModel';
+import { createAccessToken } from '../modals/session/Session.model.js';
+import { setRefreshJWT } from '../modals/user/userModel.js';
 
 export const createAccessJWT = async ({ _id, email }) => {
+  console.log(_id, 'here');
   const token = jwt.sign({ email }, process.env.SECRET_ACCESS_JWT, {
     expiresIn: '15m',
   });
@@ -11,7 +12,7 @@ export const createAccessJWT = async ({ _id, email }) => {
 
   const obj = {
     type: 'accessJWT',
-    userId: _id,
+    UserId: _id,
     token,
   };
 
@@ -31,4 +32,10 @@ export const createRefreshJWT = async ({ _id, email }) => {
     return token;
   }
   return false;
+};
+
+export const getJWTs = async (userObj) => {
+  const accessJWT = await createAccessJWT(userObj);
+  const refreshJWT = await createRefreshJWT(userObj);
+  return { accessJWT, refreshJWT };
 };

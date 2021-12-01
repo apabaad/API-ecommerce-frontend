@@ -1,4 +1,4 @@
-import SessionSchema from './Session.schema';
+import SessionSchema from './Session.schema.js';
 
 export const createAccessToken = (sessionObj) => {
   return SessionSchema(sessionObj).save();
