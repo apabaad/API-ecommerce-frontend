@@ -19,12 +19,13 @@ MongoClient();
 import categoryRouter from './src/routers/categoryRouter.js';
 import productRouter from './src/routers/productRouter.js';
 import userRouter from './src/routers/userRouter.js';
+import tokenRouter from './src/routers/tokenRouter.js';
 
 //use routers
 app.use('/api/v1/category', categoryRouter);
 app.use('/api/v1/product', productRouter);
 app.use('/api/v1/user', userRouter);
-
+app.use('/api/v1/token', tokenRouter);
 app.listen(PORT, (error) => {
   console.log('server running at port 8000');
 });

@@ -29,3 +29,8 @@ Content-Type: application/json
     "email" : "abc@a.com",
     "password":"111111"
 }
+
+### token
+
+GET http://localhost:8000/api/v1/token
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY0BhLmNvbSIsImlhdCI6MTYzODgzOTQ4MSwiZXhwIjoxNjQxNDMxNDgxfQ.aY0rJekxMr9F1cKnjT6FIfiAuAxWPxHq5_IQWqVadHg

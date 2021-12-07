@@ -3,7 +3,6 @@ import { createAccessToken } from '../modals/session/Session.model.js';
 import { setRefreshJWT } from '../modals/user/userModel.js';
 
 export const createAccessJWT = async ({ _id, email }) => {
-  console.log(_id, 'here');
   const token = jwt.sign({ email }, process.env.SECRET_ACCESS_JWT, {
     expiresIn: '15m',
   });
@@ -32,6 +31,15 @@ export const createRefreshJWT = async ({ _id, email }) => {
     return token;
   }
   return false;
+};
+
+export const verifyRefreshJWT = (refreshJWT) => {
+  try {
+    return jwt.verify(refreshJWT, process.env.SECRET_REFRESH_JWT);
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 };
 
 export const getJWTs = async (userObj) => {
