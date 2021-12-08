@@ -34,3 +34,8 @@ Content-Type: application/json
 
 GET http://localhost:8000/api/v1/token
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY0BhLmNvbSIsImlhdCI6MTYzODgzOTQ4MSwiZXhwIjoxNjQxNDMxNDgxfQ.aY0rJekxMr9F1cKnjT6FIfiAuAxWPxHq5_IQWqVadHg
+
+### get user
+
+GET http://localhost:8000/api/v1/user/getuser
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY0BhLmNvbSIsImlhdCI6MTYzODkyNzg4OSwiZXhwIjoxNjM4OTI4Nzg5fQ.OLHuJrWmCziLZc3dvFpCyav1xw0dXftZQoglThaGidQ

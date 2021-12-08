@@ -13,6 +13,9 @@ export const findUserByEmail = (email) => {
   return userSchema.findOne({ email }); //{email} because to find, mongodb always takes parameter as an object. just email wont work.
 };
 
+export const getUserById = (_id) => {
+  return userSchema.findById(_id);
+};
 export const getUser = (filter) => {
   return userSchema.findOne({ filter });
 };

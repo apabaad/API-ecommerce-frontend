@@ -6,8 +6,27 @@ import {
 } from '../middlewares/validation.middleware.js';
 import { hashPassword, verifyPassword } from '../helpers/bcrypt.helper.js';
 import { getJWTs } from '../helpers/jwt.helper.js';
+import isUserAuth from '../middlewares/isAuth.middleware.js';
 
 const Router = express.Router();
+
+Router.get('/getuser', isUserAuth, async (req, res) => {
+  try {
+    const user = req.user;
+    user.password = undefined;
+    user.refreshJWT = undefined;
+    res.json({
+      status: 'success',
+      message: 'user fetched successfully',
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      message: 'internal server error',
+    });
+  }
+});
 
 Router.post('/', newFormValidation, async (req, res) => {
   try {

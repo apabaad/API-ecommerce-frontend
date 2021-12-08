@@ -22,6 +22,14 @@ export const createAccessJWT = async ({ _id, email }) => {
   return false;
 };
 
+export const verifyAccessJWT = (accessJWT) => {
+  try {
+    return jwt.verify(accessJWT, process.env.SECRET_ACCESS_JWT);
+  } catch (error) {
+    return error.message;
+  }
+};
+
 export const createRefreshJWT = async ({ _id, email }) => {
   const token = jwt.sign({ email }, process.env.SECRET_REFRESH_JWT, {
     expiresIn: '30d',
